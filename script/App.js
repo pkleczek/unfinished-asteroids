@@ -1,16 +1,14 @@
 var app = playground({
 
-  width: 320,
-  height: 240,
+  width: 640,
+  height: 480,
 
   scaleToFit: false,
-
-  smoothing: true,
+  smoothing: false,
+  scaleToFit: true,
 
   create: function() {
-
     this.loadImages("spritesheet");
-    
   },
 
   ready: function() {

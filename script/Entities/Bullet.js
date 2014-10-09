@@ -7,7 +7,10 @@ ENGINE.Bullet = function(args) {
     lifespan: 2
   }, args);
 
-  this.radius = 3;
+  this.sprite = this.sprites[this.team];
+  this.width = this.sprite[2];
+  this.height = this.sprite[3];
+  this.radius = Math.min(this.width, this.height) / 2 | 0;
 
 };
 
@@ -48,10 +51,14 @@ ENGINE.Bullet.prototype = {
     app.game.wrap(this);
   },
 
+  sprites: [
+    [20, 53, 6, 6],
+    [43, 53, 6, 6]
+  ],
+
   render: function() {
-
-    app.layer.fillStyle("#fff").fillRect(this.x - 4, this.y - 4, 8, 8);
-
+    //app.layer.drawRegion(app.images.spritesheet, this.sprite, this.x - this.width / 2, this.y - this.height / 2);
+    app.layer.drawRegion(app.images.spritesheet, this.sprite, this.x, this.y);
   }
 
 };
