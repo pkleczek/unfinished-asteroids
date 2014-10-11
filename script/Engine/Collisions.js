@@ -9,14 +9,14 @@ ENGINE.Collisions.prototype = {
 
   step: function(delta) {
 
-    for (var i = 0; i < this.entities.children.length; i++) {
-
+    var i = this.entities.children.length;
+    while(i--) {
       var a = this.entities.children[i];
 
       if (!a.collidable) continue;
 
-      for (var j = i + 1; j < this.entities.children.length; j++) {
-
+      var j = i;
+      while(--j >= 0) {
         var b = this.entities.children[j];
 
         if (!b.collidable) continue;
@@ -29,9 +29,7 @@ ENGINE.Collisions.prototype = {
           if (this.callback) this.callback(a, b);
 
         }
-
       }
     }
-
   }
 };

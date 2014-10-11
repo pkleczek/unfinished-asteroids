@@ -22,20 +22,23 @@ ENGINE.Asteroid = function(args) {
 ENGINE.Asteroid.prototype = {
 
   constructor: ENGINE.Asteroid,
-  
+
   zIndex: 3,
 
   collidable: true,
 
   hit: function(data) {
-
     this.hp -= data.damage;
 
     if (this.hp <= 0) {
+      app.playSound("asteroid-crush");
 
       if (this.splits) this.split();
 
       this.collection.remove(this);
+    } else {
+      app.playSound("asteroid-hit");
+      app.game.players[data.team].score += 1;
     }
 
   },

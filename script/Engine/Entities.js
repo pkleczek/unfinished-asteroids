@@ -21,7 +21,7 @@ ENGINE.Entities.prototype = {
 
       var entity = new object(args);
 
-    } 
+    }
 
     /* adopt existing object */
 
@@ -44,7 +44,7 @@ ENGINE.Entities.prototype = {
 
   cleanup: function() {
 
-    for (var i = 0, len = this.children.length; i < len; i++) {
+    for (var i = 0, len = this.children.length; i < len; ++i) {
 
       var entity = this.children[i];
 
@@ -85,22 +85,17 @@ ENGINE.Entities.prototype = {
 
     if (this.dirty) this.cleanup();
 
-    for (var i = 0; i < this.children.length; i++) {
-
+    var i = this.children.length;
+    while(i--) {
       if (this.children[i].step) this.children[i].step(delta);
-
     }
-
   },
 
   render: function(delta) {
-
-    for (var i = 0; i < this.children.length; i++) {
-
+    var i = this.children.length;
+    while(i--) {
       if (this.children[i].render) this.children[i].render(delta);
-
     }
-
   }
 
 }
