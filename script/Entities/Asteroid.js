@@ -36,6 +36,11 @@ ENGINE.Asteroid.prototype = {
       if (this.splits) this.split();
 
       this.collection.remove(this);
+
+      this.collection.add(ENGINE.Coin, {
+        x: this.x,
+        y: this.y
+      });
     } else {
       app.playSound("asteroid-hit");
       app.game.players[data.team].score += 1;
