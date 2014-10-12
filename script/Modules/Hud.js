@@ -2,10 +2,18 @@ app.game.hud = {
 
   render: function(delta) {
 
-    var player = app.game.players[0];
+    var player1 = app.game.players[0];
+    var player2 = app.game.players[1];
 
-    this.renderBar(16, 16, 80, 6, player.hp / player.maxHp, "#08f");
-    app.layer.fillStyle("#fff").font("12px monospace").textAlign("right").fillText("score: " + player.score, app.width, 20);
+    if(player1) {
+      this.renderBar(16, 16, 80, 6, player1.hp / player1.maxHp, "#08f");
+      app.layer.fillStyle("#fff").font("12px monospace").textAlign("right").fillText("p1 score: " + player1.score, app.width, 20);
+    }
+
+    if(player2) {
+      this.renderBar(16, 32, 80, 6, player2.hp / player2.maxHp, "#e24");
+      app.layer.fillStyle("#fff").font("12px monospace").textAlign("right").fillText("p2 score: " + player2.score, app.width, 40);
+    }
 
   },
 

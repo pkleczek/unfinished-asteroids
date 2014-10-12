@@ -8,7 +8,8 @@ app.game = {
 
     this.players = [];
 
-    this.addPlayer(app.center.x, app.center.y, 0);
+    this.addPlayer(app.center.x + 100, app.center.y + 100, 0);
+    this.addPlayer(app.center.x - 100, app.center.y - 100, 1);
 
     this.spawnAsteroid();
     this.spawnAsteroid();
@@ -80,35 +81,32 @@ app.game = {
   },
 
   keydown: function(e) {
-    switch (e.key) {
-      case "space":
-        this.players[0].shooting = true;
-        break;
-      case "left":
-        this.players[0].left = true;
-        break;
-      case "right":
-        this.players[0].right = true;
-        break;
-      case "up":
-        this.players[0].up = true;
-        break;
-    }
+    if(this.players[0])
+      this.handleKeyboard("space", "left", "right", "up", this.players[0], true, e);
+    if(this.players[1])
+      this.handleKeyboard("q", "a", "d", "w", this.players[1], true, e);
   },
 
   keyup: function(e) {
+    if(this.players[0])
+      this.handleKeyboard("space", "left", "right", "up", this.players[0], false, e);
+    if(this.players[1])
+      this.handleKeyboard("q", "a", "d", "w", this.players[1], false, e);
+  },
+
+  handleKeyboard: function(shoot, left, right, up, player, state, e) {
     switch (e.key) {
-      case "space":
-        this.players[0].shooting = false;
+      case shoot:
+        player.shooting = state;
         break;
-      case "left":
-        this.players[0].left = false;
+      case left:
+        player.left = state;
         break;
-      case "right":
-        this.players[0].right = false;
+      case right:
+        player.right = state;
         break;
-      case "up":
-        this.players[0].up = false;
+      case up:
+        player.up = state;
         break;
     }
   }
