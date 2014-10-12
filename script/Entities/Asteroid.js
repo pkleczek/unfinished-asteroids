@@ -31,6 +31,8 @@ ENGINE.Asteroid.prototype = {
     this.hp -= data.damage;
 
     if (this.hp <= 0) {
+      app.game.players[data.team].score += 1;
+
       app.playSound("asteroid-crush");
 
       if (this.splits) this.split();
@@ -43,7 +45,6 @@ ENGINE.Asteroid.prototype = {
       });
     } else {
       app.playSound("asteroid-hit");
-      app.game.players[data.team].score += 1;
     }
 
   },
