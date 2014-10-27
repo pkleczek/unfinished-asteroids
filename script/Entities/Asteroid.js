@@ -41,7 +41,7 @@ ENGINE.Asteroid.prototype = {
 
       this.collection.remove(this);
 
-      this.collection.add(ENGINE.Coin, {
+      this.collection.add(Math.random() > 0.5 ? ENGINE.Coin : ENGINE.Powerup, {
         x: this.x,
         y: this.y
       });
