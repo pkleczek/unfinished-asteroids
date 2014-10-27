@@ -1,8 +1,6 @@
 ENGINE.Coin = function(args) {
 
-  Utils.extend(this, {
-    color: "#ff0" /* default color if none is provided */
-  }, args);
+  Utils.extend(this, {}, args);
 
 };
 
@@ -12,7 +10,21 @@ ENGINE.Coin.prototype = {
 
   collidable: true,
 
-  radius: 3,
+  frame: 0,
+
+  delta: 0,
+
+  radius: 5,
+
+  frames: [
+    [0, 0, 10, 10],
+    [11, 0, 10, 10],
+    [21, 0, 10, 10],
+    [31, 0, 10, 10],
+    [41, 0, 10, 10],
+    [51, 0, 10, 10],
+    [61, 0, 10, 10]
+  ],
 
   collision: function(object) {
 
@@ -24,12 +36,19 @@ ENGINE.Coin.prototype = {
   },
 
   step: function(delta) {
+    this.delta += delta;
 
+    if(this.delta > 0.200) {
+      this.frame = (this.frame + 1) % 7;
+      this.delta = 0;
+    }
+
+    app.game.wrap(this);
   },
 
   render: function(delta) {
 
-    app.layer.fillStyle("#ff0").fillCircle(this.x, this.y, this.radius);
+    app.layer.drawRegion(app.images.coins, this.frames[this.frame], this.x, this.y);
 
   }
 
